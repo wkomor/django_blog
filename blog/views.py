@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+from pure_pagination.mixins import PaginationMixin
 
-# Create your views here.
+from .models import Post
+
+
+class IndexView(PaginationMixin, ListView):
+    model = Post
+    template_name = 'blog/index.html'
+    paginate_by = 10
