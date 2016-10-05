@@ -1,12 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My blog</title>
+    <title>KWS blog</title>
+    <script type="text/javascript" src="{% static "assets/app.min.js" %}"></script>
+    <link type="text/css" href="{% static "assets/app.css" %}" rel="stylesheet" media="screen">
+{% block javascript %}
+    {% endblock %}
+{% block css %}
+    {% endblock %}
 </head>
+
 <body>
-{% block navigation %} {% endblock %}
-{% block content %} {% endblock %}
-{% block footer %} {% endblock %}
+<div class="parallax">
+
+  <div class="parallax__layer parallax__layer--base">
+    {% include 'blog/navbar.html' %}
+    <div id="content" class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+  </div>
+  <div class="parallax__layer parallax__layer--back">
+  </div>
+</div>
+<div id="scrollup"><img alt="Прокрутить вверх" src="{% static "assets/images/up.png" %}" width="100px"></div>
 </body>
 </html>

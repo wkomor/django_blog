@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block javascript %}
+    <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+    <script type="text/javascript">
+        tinymce.init({
+            plugins: "advlist autolink link image lists charmap print preview code",
+            selector: "textarea",
+            toolbar: [
+                        'undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright | fontsizeselect | code'
+            ],
+            fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt'
+        });
+        $(document).ready(function(){
+            var client_date = new Date();
+            $("#date").val(client_date.toLocaleDateString()) ;
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Добавить пост</h1>
+            <form action="" method="post" name="add_post">
+                <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+                {{ form.date }}
+                <p>
+                    Заголовок поста<br>
+                    {{form.title}}<br>
+                </p>
+                {{form.body | safe }}
+                <hr>
+                {{ form.tags }}
+                <br>
+                <button type="submit" class="btn btn-primary" value="Add">Добавить пост</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

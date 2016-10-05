@@ -1,0 +1,16 @@
+{% for post in posts %}
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2><a href="/post/{{ post.key().id() }}">{{ post.title }}</a></h2>
+                <div id="post_body"><p>{{ post.body|safe|truncate(800) }}</p></div>
+                {% if post.tags %}
+                    <div id="tags" class="pull-right">
+                        Тэг: <i>{{ post.tags.tag }}</i>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
