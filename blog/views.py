@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from pure_pagination.mixins import PaginationMixin
 
 from .models import Post
@@ -10,3 +9,9 @@ class IndexView(PaginationMixin, ListView):
     template_name = 'blog/index.html'
     paginate_by = 5
     context_object_name = 'posts'
+
+
+class PostView(DetailView):
+    model = Post
+    template_name = 'blog/detail.html'
+    context_object_name = 'post'
