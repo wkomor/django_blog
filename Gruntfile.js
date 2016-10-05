@@ -14,24 +14,24 @@ module.exports = function(grunt) {
                         'bower_components/bootstrap/dist/js/bootstrap.min.js',
                         'bower_components/bootstrap/js/tooltip.js',
                         'bower_components/bootstrap/js/confirmation.js',
-                        'assets/js/*.js'
+                        'static/assets/js/*.js'
                         
                     ],
-                dest: 'assets/app.js'
+                dest: 'static/assets/app.js'
                 },
             css:{
                 src: [
                     'bower_components/bootstrap/dist/css/bootstrap.min.css',
-                    'assets/css/style.css',
+                    'static/assets/css/style.css',
                 ],
-                dest: 'assets/app.css'
+                dest: 'static/assets/app.css'
             }
         },
         uglify: {
             main: {
                 files: {
                      //Результат задачи concat
-                    'assets/app.min.js': '<%= concat.main.dest %>',
+                    'static/assets/app.min.js': '<%= concat.main.dest %>',
 
                 }
             }

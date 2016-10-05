@@ -25,6 +25,15 @@
 
                             <table class="table table-condensed table-hover">
                                 <caption><h3>Опыт работы</h3></caption>
+                                {% for postion in positions %}
+                                    {{ postion.title }}
+                                    {{ postion.description }}
+                                    {{ postion.month_from }}
+                                    {{ postion.year_from }}
+                                    {{ postion.month_to }}
+                                    {{ postion.year_to }}
+
+                                {% endfor %}
                                 <tr>
                                     <td>Октябрь 2015 — по настоящее время</td>
                                     <td>ООО Очень Интересно / <a href="http://www.saritasa.com" target="_blank">Saritasa LLC </a>
@@ -102,32 +111,6 @@
             </div>
         </div>
     </div>
-
-     <div id="contact" class="modal fade" tabindex="-1", role="dialog", aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button class="close" data-dismiss="modal", aria-hidden="true">×</button>
-            <h3 class="modal-title">Контакты:</h3>
-          </div>
-          <form id="contact-form" class="modal-body" role="form">
-              <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
-            <div class="form-group">
-              <input class="form-control input-lg" type="text", placeholder="Ваше имя", required, name="your_name">
-            </div>
-            <div class="form-group">
-              <input class="form-control input-lg" type="email", placeholder="Ваш email", required, name="your_mail">
-            </div>
-            <div class="form-group">
-              <textarea class="form-control input-lg" rows="5", placeholder="Ваше сообщение", required, name="message"></textarea>
-            </div>
-          </form>
-          <div class="modal-footer">
-            <button class="btn btn-default btn-lg" type="submit", title="Отправить Email", form="contact-form">Отправить</button>
-          </div>
-        </div>
-      </div>
-    </div>
     <script>
         $(document).ready(function(){
             var date_now = new Date();
@@ -136,40 +119,5 @@
             age =  date_now.setFullYear(1984) < birthday.setFullYear(1984) ? age - 1 : age;
             $("#age").html(age);
         });
-
-        $('#contact-form').on('submit', function(e) {
-        e.preventDefault(); // предотвратим отправку формы - действие по умолчанию
-        var that = $(e.target); // получаем ссылку на источник события - форму #contact-form
-        $.ajax({ // отправляем данные
-          // URL развернутого скрипта Google Apps Script
-            //'https://script.google.com/macros/s/AKfycbw-FbVJJ7t5U3t0_Fu4agdFnzRLivG30Z-8Oi4WQOXmfXW6eT4/exec'
-          url: 'https://script.google.com/macros/s/AKfycbw-FbVJJ7t5U3t0_Fu4agdFnzRLivG30Z-8Oi4WQOXmfXW6eT4/exec',
-          data: $(this).serialize(), // собираем запрос
-          jsonp: 'cb', // имя параметра запроса
-          jsonpCallback: 'bingo', // имя функции
-          dataType:'jsonp', // тип данных
-          success: function bingo(data){
-            console.log(data); // проверим данные, полученные с бэкэнда
-            if (data == 'Error') {
-              alertForm({form: that, type: 'alert-danger', msg: 'Не удалось отправить сообщение.'});
-              return;
-            }
-            alertForm({form: that, type: 'alert-success', msg: 'Ваше сообщение отправлено.'});
-            that.find('textarea').val('');
-          },
-          error: function(){
-            alertForm({form: that, type: 'alert-danger', msg: 'Не удалось отправить сообщение.'});
-          }
-        });
-      });
-      // функция вывода сообщений в модальную форму
-      function alertForm(alert) {
-        var div = $('<div class="alert ' + alert.type + '" style="display: none;">' + alert.msg + '</div>');
-        alert.form.prepend(div);
-        div.slideDown(400).delay(3000).slideUp(400, function() {
-          alert.form.closest('.modal').modal('hide');
-          div.remove();
-        });
-      }
     </script>
 {% endblock %}

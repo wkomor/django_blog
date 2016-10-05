@@ -13,3 +13,19 @@ class Post(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+
+class JobPositions(models.Model):
+    title = models.CharField(max_length=1024, verbose_name='Организация')
+    description = models.TextField(verbose_name='Описание')
+    month_from = models.PositiveSmallIntegerField()
+    month_to = models.PositiveSmallIntegerField(blank=True, null=True)
+    year_from = models.PositiveIntegerField()
+    year_to = models.PositiveIntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class IndexPage(models.Model):
+    description = models.TextField()

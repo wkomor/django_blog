@@ -6,7 +6,7 @@
         <a href="/"><h1>Technical notebook</h1></a>
         <nav>
             <ul>
-                <li><a class="btn btn-default" href="#" title="About">{{ _('Обо мне')}}</a></li>
+                <li><a class="btn btn-default" href="{% url 'about' %}" title="About">{{ _('Обо мне')}}</a></li>
             </ul>
             {% if current_user.is_authenticated %}
                 <a href="/admin">Администрирование</a>
