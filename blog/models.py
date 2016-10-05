@@ -10,3 +10,6 @@ class Post(TimeStampedModel):
     text = models.TextField(verbose_name='Текст', blank=True, null=True)
 
     tags = TaggableManager()
+
+    def __str__(self):
+        return self.title
