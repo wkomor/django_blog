@@ -26,44 +26,21 @@
                             <table class="table table-condensed table-hover">
                                 <caption><h3>Опыт работы</h3></caption>
                                 {% for postion in positions %}
-                                    {{ postion.title }}
-                                    {{ postion.description }}
-                                    {{ postion.month_from }}
-                                    {{ postion.year_from }}
-                                    {{ postion.month_to }}
-                                    {{ postion.year_to }}
-
-                                {% endfor %}
                                 <tr>
-                                    <td>Октябрь 2015 — по настоящее время</td>
-                                    <td>ООО Очень Интересно / <a href="http://www.saritasa.com" target="_blank">Saritasa LLC </a>
+                                    <td>{{ postion.month_from }} {{ postion.year_from }} —
+                                        {% if postion.month_to and postion.year_to %}
+                                        {{ postion.month_to }} {{ postion.year_to }}
+                                        {% else %}
+                                        по настоящее время
+                                        {% endif %}
+                                    </td>
+                                    <td> {{ postion.title|safe }}
                                         <br>
-                                        <b>Программист Python</b>
-                                </tr>
-                                <tr>
-                                    <td>Май 2008 — по настоящее время</td>
-                                    <td><a href="http://www.sibgtu.ru/index.php?task=person&id=komorovsky_vs" target="_blank">Сибирский государственный технологический университет</a>
-                                        <br>
-                                        <b>Доцент</b></td>
-                                </tr>
-                                <tr>
-                                    <td>Февраль 2015 — январь 2016</td>
-                                    <td><a href="http://soft-garage.ru/" target="_blank">ООО Софт-гараж</a><br>
-                                    <b>Основатель, технический менеджер</b>
+                                        <b>{{ postion.description }}</b>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Сентябрь 2011 — октябрь 2015</td>
-                                    <td><a href="http://www.sibpsa.ru/ntc/about/" target="_blank">Центр НИОКР Сибирской пожарно-спасательной академии ГПС МЧС России</a>
-                                        <br>
-                                    <b>Старший научный сотрудник</b></td>
-                                </tr>
-                                <tr>
-                                    <td>Ноябрь 2003 — май 2008</td>
-                                    <td><a href="http://www.icct.ru/" target="_blank">Институт химии и химической технологии СО РАН</a>
-                                        <br>
-                                    <b>Старший лаборант</b></td>
-                                </tr></table>
+                                {% endfor %}
+                                </table>
                             <table class="table table-hover">
                                 <caption><h3>Образование</h3></caption>
                                 <thead>

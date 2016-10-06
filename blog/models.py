@@ -22,9 +22,13 @@ class JobPositions(models.Model):
     month_to = models.PositiveSmallIntegerField(blank=True, null=True)
     year_from = models.PositiveIntegerField()
     year_to = models.PositiveIntegerField(blank=True, null=True)
+    order = models.PositiveSmallIntegerField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['order']
 
     def __str__(self):
-        return self.title
+        return self.title[:15]
 
 
 class IndexPage(models.Model):
