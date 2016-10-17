@@ -1,14 +1,22 @@
 from django.views.generic import ListView, DetailView, TemplateView
 from pure_pagination.mixins import PaginationMixin
 
-from .models import Post, JobPositions
+from .models import Post, JobPositions, IndexPage
 
 
 class IndexView(PaginationMixin, ListView):
     model = Post
     template_name = 'blog/index.html'
-    paginate_by = 5
+    paginate_by = 2
     context_object_name = 'posts'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        page = self.request.GET.get('page')
+        if not page or page == 1:
+            context['index'] = IndexPage.objects.all().values_list(
+                'description', flat=True).first()
+        return context
 
 
 class PostView(DetailView):
@@ -25,7 +33,7 @@ class AboutView(TemplateView):
 
     def get_month_name(self, number):
         if isinstance(number, int) and 0 < number <= 12:
-            return self.MONTH[number-1]
+            return self.MONTH[number - 1]
 
     def get_month(self, data):
         data['month_from'] = self.get_month_name(data.get('month_from'))

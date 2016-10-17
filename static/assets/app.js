@@ -536,7 +536,7 @@ d.parent(".dropdown-menu").length&&(d=d.closest("li.dropdown").addClass("active"
 /**
  * Created by vitold on 28.03.16.
  */
-var current_page = 0;
+var current_page = 1;
 /* function to load posts
 * @page: offset for pages
 * */
@@ -549,15 +549,13 @@ function load_posts(page){
     })
 }
 
-$(document).ready(function(){
-    /* initial loading*/
-    load_posts(current_page);
-});
 
 $(window).scroll(function(){
 /* scroll listener*/
 		if ($(document).height() - $(window).height() <= $(window).scrollTop()) {
-            current_page += 2;
+            current_page += 1;
+            var has_next = $('#has_next').html();
+            alert(has_next);
             console.log(current_page);
             load_posts(current_page);
 }});
