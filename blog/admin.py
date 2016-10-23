@@ -1,10 +1,20 @@
+from django import forms
 from django.contrib import admin
 from .models import Post, JobPositions, IndexPage
+from ckeditor.widgets import CKEditorWidget
+
+
+class PostAdminForm(forms.ModelForm):
+    text = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = Post
+        fields = ['title', 'text', 'tags']
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    fields = ['title', 'text', 'tags']
+    form = PostAdminForm
     readonly_fields = ['created']\
 
 

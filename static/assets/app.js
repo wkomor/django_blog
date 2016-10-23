@@ -559,7 +559,6 @@ $(window).scroll(function(){
 		if ($(document).height() - $(window).height() <= $(window).scrollTop()) {
             if (!$("#footer").html())
             {
-                console.log(current_page);
                 load_posts();
             }
 
