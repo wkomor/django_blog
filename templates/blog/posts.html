@@ -1,5 +1,5 @@
-<div id="has_next" style="display: none">{{ page_obj.has_next }}</div>
 {% for post in posts %}
+    <div class="row">
         <div class="panel panel-default">
             <div class="panel-body">
                 <h2><a href="{% url 'post' post.id %}">{{ post.title }}</a></h2>
@@ -14,5 +14,6 @@
                 {% endif %}
             </div>
         </div>
+    </div>
 {% endfor %}
 

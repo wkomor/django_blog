@@ -1,21 +1,31 @@
 from django.views.generic import ListView, DetailView, TemplateView
-from pure_pagination.mixins import PaginationMixin
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post, JobPositions, IndexPage
 
 
-class IndexView(PaginationMixin, ListView):
-    model = Post
+class IndexView(ListView):
+    queryset = IndexPage.objects.all().values_list(
+                'description', flat=True).first()
     template_name = 'blog/index.html'
-    paginate_by = 2
+    context_object_name = 'index'
+
+
+class PostsListView(ListView):
+    queryset = Post.objects.all().values().order_by('-created')
+    template_name = 'blog/posts.html'
+    paginate_by = 5
     context_object_name = 'posts'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        paginator = Paginator(self.queryset, self.paginate_by)
         page = self.request.GET.get('page')
-        if not page or page == 1:
-            context['index'] = IndexPage.objects.all().values_list(
-                'description', flat=True).first()
+        try:
+            context['posts'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['posts'] = paginator.page(1)
+        except EmptyPage:
+            context['posts'] = paginator.page(paginator.num_pages)
         return context
 
 

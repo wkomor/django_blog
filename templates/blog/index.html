@@ -2,13 +2,14 @@
 
 {% block content %}
     <div class="row">
-    <div class="main-post">
-    {{ index|safe }}
-    </div>
+        <div class="main-post">
+            {{ index|safe }}
+        </div>
     </div>
     <div id="posts" data-url="/posts">
-    <div class="row">
-        {% include 'blog/posts.html' %}
+
+            {% include 'blog/posts.html' %}
+
     </div>
-    </div>
+
 {% endblock %}

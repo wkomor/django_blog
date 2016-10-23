@@ -540,24 +540,29 @@ var current_page = 1;
 /* function to load posts
 * @page: offset for pages
 * */
-function load_posts(page){
+function load_posts(){
     var url = $("#posts").data('url');
     var data ={};
-    data.page = page;
+    data.page = current_page;
     $.get(url, data, function(data){
         $("#posts").append(data);
-    })
+    });
+    current_page += 1
 }
 
+$(document).ready(function () {
+    load_posts();
+});
 
 $(window).scroll(function(){
 /* scroll listener*/
 		if ($(document).height() - $(window).height() <= $(window).scrollTop()) {
-            current_page += 1;
-            var has_next = $('#has_next').html();
-            alert(has_next);
-            console.log(current_page);
-            load_posts(current_page);
+            if (!$("#footer").html())
+            {
+                console.log(current_page);
+                load_posts();
+            }
+
 }});
 
 
