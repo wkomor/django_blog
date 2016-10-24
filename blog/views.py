@@ -11,7 +11,7 @@ class IndexView(ListView):
 
 
 class PostsListView(ListView):
-    queryset = Post.objects.all().values().order_by('-created')
+    queryset = Post.objects.filter(publish=True).values().order_by('-created')
     template_name = 'blog/posts.html'
     paginate_by = 5
     context_object_name = 'posts'

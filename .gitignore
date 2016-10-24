@@ -3,3 +3,4 @@
 db.sqlite3
 .bower_components
 .node_modules
+blogkomor/local_settings.py

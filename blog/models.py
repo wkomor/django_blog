@@ -8,6 +8,8 @@ class Post(TimeStampedModel):
     title = models.CharField(max_length=255, verbose_name='Заголовок',
                              db_index=True)
     text = models.TextField(verbose_name='Текст', blank=True, null=True)
+    publish = models.BooleanField(verbose_name='Опубликовать', blank=True,
+                                  default=False)
 
     tags = TaggableManager()
 

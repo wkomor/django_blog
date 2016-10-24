@@ -9,7 +9,7 @@ class PostAdminForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'text', 'tags']
+        fields = ['title', 'text', 'tags', 'publish']
 
 
 @admin.register(Post)
