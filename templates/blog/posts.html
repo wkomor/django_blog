@@ -1,19 +1,40 @@
+{% load static %}
+{% load comments %}
 {% for post in posts %}
+    {% get_comment_count for post as comment_count %}
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-body">
                 <h2><a href="{% url 'post' post.id %}">{{ post.title }}</a></h2>
-                <div id="post_body"><p>{{ post.text|safe|truncatewords:30 }}</p></div>
-                {% if post.tags %}
-                    <div id="tags" class="pull-right">
-                        Тэги:
-                        {% for tag in post.tags.all %}
-                            <i>{{ tag.name }} </i>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                <div id="post_body"><p>{{ post.text|safe|truncatewords:45 }}</p></div>
+                <div class="col-lg-4"><i>Комментариев: </i> {{ comment_count }} </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    {% if post.tags %}
+                        <div id="tags" class="pull-right">
+                            Тэги:
+                            {% for tag in post.tags.all %}
+                                <i>{{ tag.name }} </i>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
 {% endfor %}
-
+{% if not page_obj.has_next %}
+    <div class="row">
+        <div class="footer container">
+            <div id="social">
+                <ul>
+                    <li><a href="https://github.com/wkomor" target="_blank"><img src="{% static 'assets/images/github.png' %}" alt=""></a></li>
+                    <li><a href="https://www.facebook.com/asist.sistem" target="_blank"><img src="{% static 'assets/images/fb.png' %}" alt=""></a></li>
+                </ul>
+            </div>
+            <div id="rights" class="pull-right">
+                &copy; Коморовский В.С.
+            </div>
+        </div>
+    </div>
+{% endif %}

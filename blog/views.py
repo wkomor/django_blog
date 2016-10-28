@@ -3,15 +3,22 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post, JobPositions, IndexPage
 
 
-class IndexView(ListView):
+class IndexView(TemplateView):
     queryset = IndexPage.objects.all().values_list(
-                'description', flat=True).first()
+        'description', flat=True).first()
     template_name = 'blog/index.html'
-    context_object_name = 'index'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['index'] = self.queryset
+        return context
 
 
 class PostsListView(ListView):
-    queryset = Post.objects.filter(publish=True).values().order_by('-created')
+    queryset = Post.objects.filter(publish=True).only('id',
+                                                      'title',
+                                                      'text'
+                                                      ).order_by('-created')
     template_name = 'blog/posts.html'
     paginate_by = 5
     context_object_name = 'posts'

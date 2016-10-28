@@ -91,7 +91,7 @@ ol {
 #scrollup {
     position: fixed; /* фиксированная позиция */
     opacity: 0.8; /* прозрачность */
-    padding: 15px 10px 10px; /* отступы */
+    padding: 15px 10px 10px;/* отступы */
     background: #aaa;
     border-radius: 5px; /* скругление углов */
     -webkit-border-radius: 5px;
@@ -112,4 +112,28 @@ ol {
 
 #add_comment {
     margin-top: 20px;
+}
+
+.footer{
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 15px;
+    background: #ffffff;
+    opacity: 0.9;
+    height: 50px;
+    /*margin: 4px 0 20px 0;*/
+    -o-border-radius: 5px 5px  5px 5px;
+    -moz-border-radius: 5px 5px  5px 5px;
+    -webkit-border-radius: 5px 5px  5px 5px;
+    border-radius: 5px 5px  5px 5px;
+
+}
+
+#social li {
+        float: left;
+        margin-left: 15px;
+}
+
+#rights {
+    margin-top: 5px;
 }
