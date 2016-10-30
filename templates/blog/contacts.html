@@ -1,29 +1,44 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <div class="row">
-        <div class="main-post">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    contacts
-                    <form action="" method="post" name="add_post">
-                <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
-                {{ form.your_name }}
-                <p>
-                    Заголовок поста<br>
-                    {{form.your_email}}<br>
-                </p>
-                {{form.message  }}
-                <br>
-                <button type="submit" class="btn btn-primary" value="Add">Добавить пост</button>
-            </form>
-                </div>
-            </div>
-        </div>
+{% load crispy_forms_tags %}
+<div class="modal" id="contact" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Связаться со мной:</h4>
+      </div>
+      <div class="modal-body">
+          {% crispy form %}
+      </div>
     </div>
+  </div>
+</div>
+<script>
+$( "#feedback" ).submit(function( event ) {
 
-    <script>
+  // Stop form from submitting normally
+  event.preventDefault();
+  var data = $( this ).serialize();
+  // Get some values from elements on the page:
+  $.ajax({
+      type: "POST",
+      url:  $( this ).attr( "action" ),
+      data: data,
+      success: function (data) {
+        onSuccess();
+      },
+      error: function (data) {
+           $.each(data.responseJSON, function(key, value){
+               $("#div_id_" + key).addClass('has-error');
+            });
+      },
+      dataType: 'json'
+    });
+});
+function onSuccess() {
+    $("#contact").hide();
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $("#success-alert").show();
 
-
-    </script>
-{% endblock %}
+}
+</script>

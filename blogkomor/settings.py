@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django_comments',
     'taggit',
     'ckeditor',
+    'captcha',
+    'crispy_forms',
 
     'blog',
 ]
@@ -120,5 +122,7 @@ STATICFILES_DIRS = [
 ]
 
 SITE_ID = 1
+
+CAPTCHA_AJAX = True
 
 from .local_settings import *

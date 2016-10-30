@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
-
 {% block content %}
+    <div class="alert alert-success" id="success-alert" >
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Успешно!</strong>
+        Ваше сообщение отправлено.
+    </div>
     <div class="row">
         <div class="main-post">
             <div class="panel panel-default">
@@ -16,8 +20,9 @@
                                     <a href="http://hh.ru/resume/37276eaeff02a2181d0039ed1f763852305a55" target="_blank" class="btn btn-success pull-left">Hire me on HeadHunter</a>
                                 </li>
                                 <li>
-                                    <a href="#contact" data-toggle="modal" class="btn btn-primary pull-left">Contact me</a>
+                                    <a href="#contact" data-toggle="modal" class="btn btn-primary pull-left" data-target="#contact">Contact me</a>
                                 </li>
+
                             </ul>
                             </div>
                         <div class="col-lg-8">
@@ -97,4 +102,7 @@
             $("#age").html(age);
         });
     </script>
+    <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+    <script type="text/javascript" src="http://getbootstrap.com/2.3.2/assets/js/bootstrap.js"></script>
+{% include 'blog/contacts.html' %}
 {% endblock %}

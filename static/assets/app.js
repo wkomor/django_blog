@@ -564,7 +564,6 @@ $(window).scroll(function(){
 
 }});
 
-
 /**
  * Created by vitold on 26.04.16.
  */

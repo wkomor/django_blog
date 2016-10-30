@@ -131,3 +131,13 @@ ol {
 #rights {
     margin-top: 5px;
 }
+
+.form-horizontal .form-group {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alert {
+    display: none;
+    margin-top: 50px;
+}
